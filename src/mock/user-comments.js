@@ -6,7 +6,7 @@ import {
 
 const COMMENTS_COUNT = 10;
 
-const EmojiTitles = [
+const emojiTitles = [
   `angry`,
   `puke`,
   `sleeping`,
@@ -30,7 +30,7 @@ const authorsList = [
 
 const Comment = function () {
   this.commentEmojiURL =
-    `./images/emoji/${getRandomElementInArray(EmojiTitles)}.png`;
+    `./images/emoji/${getRandomElementInArray(emojiTitles)}.png`;
 
   this.commentText = `${getRandomElementInArray(commentsText)}`;
   this.commentAuthor = `${getRandomElementInArray(authorsList)}`;
