@@ -2,7 +2,7 @@ import {generateFilmData} from './films-data';
 
 const FILMS_QUANTITY = 15;
 
-const FilmsList = [];
+const filmsList = [];
 
 const generateFilmsList = () => {
   for (let i = 0; i < FILMS_QUANTITY; i++) {
@@ -10,11 +10,11 @@ const generateFilmsList = () => {
 
     generatedFilmData.id = i;
 
-    FilmsList.push(generatedFilmData);
+    filmsList.push(generatedFilmData);
   }
 };
 
 export {
   generateFilmsList,
-  FilmsList
+  filmsList
 };

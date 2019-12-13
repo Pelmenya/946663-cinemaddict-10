@@ -1,4 +1,4 @@
-import {FilmsList} from './mock/films-list';
+import {filmsList} from './mock/films-list';
 
 import {
   renderFilmCards,
@@ -11,10 +11,10 @@ const onShowMoreBtnClick = () => {
   const filmCardsAmount = mainFilmsListContainer.querySelectorAll(`.film-card`).length;
   const endRenderIndex = filmCardsAmount + CARDS_AMOUNT_IN_MAIN_LIST;
 
-  if (filmCardsAmount < FilmsList.length && endRenderIndex <= FilmsList.length) {
-    renderFilmCards(FilmsList, filmCardsAmount, endRenderIndex, mainFilmsListContainer);
+  if (filmCardsAmount < filmsList.length && endRenderIndex <= filmsList.length) {
+    renderFilmCards(filmsList, filmCardsAmount, endRenderIndex, mainFilmsListContainer);
 
-    if (endRenderIndex >= FilmsList.length) {
+    if (endRenderIndex >= filmsList.length) {
       showMoreBtn.classList.add(`visually-hidden`);
     }
   }

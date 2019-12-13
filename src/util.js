@@ -2,7 +2,7 @@ import {
   MINUTES_IN_HOUR,
   HOURS_IN_DAY,
   MONTHS
-} from './const';
+} from './constans';
 
 const booleanList = [true, false];
 
@@ -13,6 +13,8 @@ const getRandomInRange = (min, max) =>
 const getRandomNumber = function (maxNumber) {
   return Math.floor(Math.random() * maxNumber);
 };
+
+const getRandomElementInArray = (array) => array[Math.floor(Math.random() * array.length)];
 
 const shuffleArray = function (array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -50,8 +52,6 @@ const formatTime = (timeInMinutes) => {
 
   return `${hours}h ${minutes}m`;
 };
-
-const getRandomElementInArray = (array) => array[getRandomInRange(0, array.length - 1)];
 
 const getMonthName = (mounthNumber) => MONTHS[mounthNumber - 1];
 

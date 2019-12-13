@@ -2,7 +2,7 @@ import {
   getRandomElementInArray,
   getRandomDate,
   getRandomNumber,
-} from './../util';
+} from '../util';
 
 const COMMENTS_COUNT = 10;
 

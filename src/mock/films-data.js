@@ -7,7 +7,7 @@ import {
   booleanList
 } from './../util';
 
-import {generateCommentsList} from './comments';
+import {generateCommentsList} from './user-comments';
 
 const MIN_SENTENCE_IN_DESCRIPTION = 1;
 const MAX_SENTENCE_IN_DESCRIPTION = 3;

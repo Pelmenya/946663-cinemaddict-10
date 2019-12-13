@@ -1,4 +1,4 @@
-export const filmPopupTemplate = (filmPopup) => `
+const filmPopupTemplate = (filmPopup) => `
 <section class="film-details">
   <form class="film-details__inner" action="" method="get">
     <div class="form-details__top-container">
@@ -82,84 +82,7 @@ export const filmPopupTemplate = (filmPopup) => `
           ${filmPopup.comments.length}
         </span>
       </h3>
-      <ul class="film-details__comments-list">
-        <li class="film-details__comment">
-          <span class="film-details__comment-emoji">
-            <img src="${filmPopup.comments[0].commentEmojiURL}" width="55" height="55" alt="emoji">
-          </span>
-          <div>
-            <p class="film-details__comment-text">
-              ${filmPopup.comments[0].commentText}
-            </p>
-            <p class="film-details__comment-info">
-              <span class="film-details__comment-author">
-                ${filmPopup.comments[0].commentAuthor}
-              </span>
-              <span class="film-details__comment-day">
-                ${filmPopup.comments[0].commentDay}
-              </span>
-              <button class="film-details__comment-delete">Delete</button>
-            </p>
-          </div>
-        </li>
-        <li class="film-details__comment">
-          <span class="film-details__comment-emoji">
-            <img src="${filmPopup.comments[1].commentEmojiURL}" width="55" height="55" alt="emoji">
-          </span>
-          <div>
-            <p class="film-details__comment-text">
-              ${filmPopup.comments[1].commentText}
-            </p>
-            <p class="film-details__comment-info">
-              <span class="film-details__comment-author">
-                ${filmPopup.comments[1].commentAuthor}
-              </span>
-              <span class="film-details__comment-day">
-                ${filmPopup.comments[1].commentDay}
-              </span>
-              <button class="film-details__comment-delete">Delete</button>
-            </p>
-          </div>
-        </li>
-        <li class="film-details__comment">
-          <span class="film-details__comment-emoji">
-            <img src="${filmPopup.comments[2].commentEmojiURL}" width="55" height="55" alt="emoji">
-          </span>
-          <div>
-            <p class="film-details__comment-text">
-              ${filmPopup.comments[2].commentText}
-            </p>
-            <p class="film-details__comment-info">
-              <span class="film-details__comment-author">
-                ${filmPopup.comments[2].commentAuthor}
-              </span>
-              <span class="film-details__comment-day">
-                ${filmPopup.comments[2].commentDay}
-              </span>
-              <button class="film-details__comment-delete">Delete</button>
-            </p>
-          </div>
-        </li>
-        <li class="film-details__comment">
-          <span class="film-details__comment-emoji">
-            <img src="${filmPopup.comments[3].commentEmojiURL}" width="55" height="55" alt="emoji">
-          </span>
-          <div>
-            <p class="film-details__comment-text">
-              ${filmPopup.comments[3].commentText}
-            </p>
-            <p class="film-details__comment-info">
-              <span class="film-details__comment-author">
-                ${filmPopup.comments[3].commentAuthor}
-              </span>
-              <span class="film-details__comment-day">
-                ${filmPopup.comments[3].commentDay}
-              </span>
-              <button class="film-details__comment-delete">Delete</button>
-            </p>
-          </div>
-        </li>
-      </ul>
+      <ul class="film-details__comments-list"></ul>
       <div class="film-details__new-comment">
         <div for="add-emoji" class="film-details__add-emoji-label"></div>
 
@@ -189,3 +112,18 @@ export const filmPopupTemplate = (filmPopup) => `
   </div>
 </form>
 </section>`;
+
+//  Описываем логику закрытия попапа
+const addClosePopupLogic = (popupContainer, closeElement) => {
+  const onClosePopupBtnClick = () => {
+    popupContainer.classList.add(`visually-hidden`);
+    closeElement.removeEventListener(`click`, onClosePopupBtnClick);
+  };
+
+  closeElement.addEventListener(`click`, onClosePopupBtnClick);
+};
+
+export {
+  filmPopupTemplate,
+  addClosePopupLogic,
+};
