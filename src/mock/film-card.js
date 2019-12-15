@@ -1,7 +1,7 @@
 import {getRandomElementInArray} from './../util';
 
 const MAX_DESCRIPTION_LENGTH = 140;
-const MAX_DESCRIPTION_SYMBOLS_DISPLAYED = 139;
+const MAX_DESCRIPTION_SYMBOLS_DISPLAYED = 139 - 3;
 
 const getShortFilmDescription = (description) => {
   let shortDescription = description;
@@ -22,7 +22,7 @@ const generateFilmCard = (filmData) => {
     duration: filmData.duration,
     mainGenre: getRandomElementInArray(filmData.genres),
     shortDescription: getShortFilmDescription(filmData.description),
-    commentsAmount: `${filmData.comments.length} comments`
+    commentsAmount: `${filmData.comments.length} ${filmData.comments.length === 1 ? `comment` : `comments`}`
   };
 
   return filmCard;

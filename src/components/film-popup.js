@@ -1,3 +1,8 @@
+import {renderTemplate} from './../main';
+import {generateFilmPopup} from './../mock/film-popup';
+import {getRandomElementInArray} from './../util';
+import {renderComments} from './user-comments';
+
 const filmPopupTemplate = (filmPopup) => `
 <section class="film-details">
   <form class="film-details__inner" action="" method="get">
@@ -123,7 +128,20 @@ const addClosePopupLogic = (popupContainer, closeElement) => {
   closeElement.addEventListener(`click`, onClosePopupBtnClick);
 };
 
+const renderPopup = (container, filmsList) => {
+  const randomFilmData = getRandomElementInArray(filmsList);
+  const popupData = generateFilmPopup(randomFilmData);
+
+  renderTemplate(container, filmPopupTemplate(popupData));
+
+  const popupContainer = document.querySelector(`.film-details`);
+  const closePopupBtn = popupContainer.querySelector(`.film-details__close-btn`);
+  const popupCommentListContainer = popupContainer.querySelector(`.film-details__comments-list`);
+
+  addClosePopupLogic(popupContainer, closePopupBtn);
+  renderComments(popupData, popupCommentListContainer);
+};
+
 export {
-  filmPopupTemplate,
-  addClosePopupLogic,
+  renderPopup,
 };

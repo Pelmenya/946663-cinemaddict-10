@@ -10,5 +10,5 @@ const getHistoryFilmsList =
 export {
   getFavoriteFilmsList,
   getWatchlist,
-  getHistoryFilmsList
+  getHistoryFilmsList,
 };
