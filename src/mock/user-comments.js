@@ -1,8 +1,4 @@
-import {
-  getRandomElementInArray,
-  getRandomDate,
-  getRandomNumber,
-} from '../util';
+import {util} from './../util';
 
 const COMMENTS_COUNT = 10;
 
@@ -30,17 +26,17 @@ const authorsList = [
 
 const Comment = function () {
   this.commentEmojiURL =
-    `./images/emoji/${getRandomElementInArray(emojiTitles)}.png`;
+    `./images/emoji/${util.getRandomElementInArray(emojiTitles)}.png`;
 
-  this.commentText = `${getRandomElementInArray(commentsText)}`;
-  this.commentAuthor = `${getRandomElementInArray(authorsList)}`;
-  this.commentDay = `${getRandomDate().getFullYear()}/${getRandomDate().getMonth()}/${getRandomDate().getDate()} ${getRandomDate().getHours()}:${getRandomDate().getMinutes()}`;
+  this.commentText = `${util.getRandomElementInArray(commentsText)}`;
+  this.commentAuthor = `${util.getRandomElementInArray(authorsList)}`;
+  this.commentDay = `${util.getRandomDate().getFullYear()}/${util.getRandomDate().getMonth()}/${util.getRandomDate().getDate()} ${util.getRandomDate().getHours()}:${util.getRandomDate().getMinutes()}`;
 };
 
 const generateCommentsList = () => {
   let commentsList = [];
 
-  for (let i = 0; i < getRandomNumber(COMMENTS_COUNT); i++) {
+  for (let i = 0; i < util.getRandomNumber(COMMENTS_COUNT); i++) {
     commentsList.push(new Comment());
   }
 

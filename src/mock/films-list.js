@@ -2,19 +2,20 @@ import {generateFilmData} from './films-data';
 
 const FILMS_QUANTITY = 15;
 
-const filmsList = [];
+const generateFilmsDataList = () => {
+  let filmsDataList = [];
 
-const generateFilmsList = () => {
   for (let i = 0; i < FILMS_QUANTITY; i++) {
     let generatedFilmData = generateFilmData();
 
-    generatedFilmData.id = i;
+    generatedFilmData.id = i + 1;
 
-    filmsList.push(generatedFilmData);
+    filmsDataList.push(generatedFilmData);
   }
+
+  return filmsDataList;
 };
 
 export {
-  generateFilmsList,
-  filmsList
+  generateFilmsDataList
 };

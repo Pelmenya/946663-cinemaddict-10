@@ -1,23 +1,29 @@
-const MINUTES_IN_HOUR = 60;
-const HOURS_IN_DAY = 24;
+export const Constant = {
 
-const MONTHS = [
-  `January`,
-  `February`,
-  `March`,
-  `April`,
-  `May`,
-  `June`,
-  `July`,
-  `August`,
-  `September`,
-  `October`,
-  `November`,
-  `December`
-];
+  MINUTES_IN_HOUR: 60,
+  HOURS_IN_DAY: 24,
 
-export {
-  MINUTES_IN_HOUR,
-  HOURS_IN_DAY,
-  MONTHS
+  MONTHS: [
+    `January`,
+    `February`,
+    `March`,
+    `April`,
+    `May`,
+    `June`,
+    `July`,
+    `August`,
+    `September`,
+    `October`,
+    `November`,
+    `December`
+  ],
+
+  BOOLEAN_VALUES: [true, false],
+
+  RENDER_POSITION: {
+    //   внутрь elem, в самое начало.
+    AFTERBEGIN: `afterBegin`,
+    //  внутрь elem, в конец.
+    BEFOREEND: `beforeEnd`,
+  },
 };

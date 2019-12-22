@@ -1,34 +1,52 @@
-import {filmsList} from './../mock/films-list';
-import {CARDS_AMOUNT_IN_MAIN_LIST} from './films-lists';
+import {util} from './../util';
+import FilmCard from './film-card';
 
-import {
-  renderFilmCards,
-  renderTemplate
-} from './../main';
+const getShowMoreBtnTemplate = () => `<button class="films-list__show-more">Show more</button>`;
 
-const showMoreBtnTemplate = () => `<button class="films-list__show-more">Show more</button>`;
+export default class ShowMoreBtn {
+  constructor(renderCardsAmount, filmsList) {
+    this._renderCardsAmount = renderCardsAmount;
+    this._filmsList = filmsList;
+    this._element = null;
+  }
 
-const renderShowMoreBtn = (container) => {
-  renderTemplate(container, showMoreBtnTemplate());
+  getTemplate() {
+    return getShowMoreBtnTemplate();
+  }
 
-  const showMoreBtn = container.querySelector(`.films-list__show-more`);
+  getElement() {
+    if (!this._element) {
+      this._element = util.createElement(this.getTemplate());
+      this._element.addEventListener(`click`, this.onShowMoreBtnClick.bind(this));
+    }
 
-  const onShowMoreBtnClick = () => {
-    const filmCardsAmount = container.querySelectorAll(`.film-card`).length;
-    const cardsContainer = container.querySelector(`.films-list__container`);
-    const endRenderIndex = filmCardsAmount + CARDS_AMOUNT_IN_MAIN_LIST;
+    return this._element;
+  }
 
-    if (filmCardsAmount < filmsList.length && endRenderIndex <= filmsList.length) {
-      renderFilmCards(filmsList, filmCardsAmount, endRenderIndex, cardsContainer);
+  removeElement() {
+    this._element = null;
+  }
 
-      if (endRenderIndex >= filmsList.length) {
-        showMoreBtn.remove();
-        showMoreBtn.removeEventListener(`click`, onShowMoreBtnClick);
+  onShowMoreBtnClick() {
+    const cardsContainer = this._element.parentElement.querySelector(`.films-list__container`);
+    let filmCardsAmount = cardsContainer.querySelectorAll(`.film-card`).length;
+    let endRenderIndex = filmCardsAmount + this._renderCardsAmount;
+
+    if (filmCardsAmount < this._filmsList.length && endRenderIndex <= this._filmsList.length) {
+      let renderList = this._filmsList.slice(filmCardsAmount, endRenderIndex);
+      let cardsList = [];
+
+      for (let i = 0; i < renderList.length; i++) {
+        cardsList.push(new FilmCard(renderList[i]).getElement());
+      }
+
+      for (let card of cardsList) {
+        util.renderElement(cardsContainer, card);
       }
     }
-  };
 
-  showMoreBtn.addEventListener(`click`, onShowMoreBtnClick);
-};
-
-export {renderShowMoreBtn};
+    if (endRenderIndex >= this._filmsList.length) {
+      this._element.remove();
+    }
+  }
+}
