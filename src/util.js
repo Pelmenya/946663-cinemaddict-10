@@ -1,67 +1,88 @@
-import {
-  MINUTES_IN_HOUR,
-  HOURS_IN_DAY,
-  MONTHS
-} from './constans';
+import {Constant} from './constans';
+import FilmCard from './components/film-card';
 
-const booleanList = [true, false];
+export const util = {
+  getRandomInRange(min, max) {
+    //  Включая минимальное и максимальное значение
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  },
 
-const getRandomInRange = (min, max) =>
-  //  Включая минимальное и максимальное значение
-  Math.floor(Math.random() * (max - min + 1)) + min;
+  getRandomNumber(maxNumber) {
+    return Math.floor(Math.random() * maxNumber);
+  },
 
-const getRandomNumber = function (maxNumber) {
-  return Math.floor(Math.random() * maxNumber);
-};
+  getRandomElementInArray(array) {
+    return array[Math.floor(Math.random() * array.length)];
+  },
 
-const getRandomElementInArray = (array) => array[Math.floor(Math.random() * array.length)];
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
 
-const shuffleArray = function (array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
-};
+    return array;
+  },
 
-const getRandomDate = () => {
-  const MIN_YEAR = 1970;
-  const MIN_MOUNTH_IN_YEAR = 0;
-  const MAX_MOUNTH_IN_YEAR = 11;
-  const MIN_DAY_IN_MOUNTH = 1;
-  const MAX_DAY_IN_MOUNTH = 31;
+  getRandomDate() {
+    const MIN_YEAR = 1970;
+    const MIN_MOUNTH_IN_YEAR = 0;
+    const MAX_MOUNTH_IN_YEAR = 11;
+    const MIN_DAY_IN_MOUNTH = 1;
+    const MAX_DAY_IN_MOUNTH = 31;
 
-  const currentYear = new Date().getFullYear();
+    const currentYear = new Date().getFullYear();
 
-  const randomDate = new Date(
-      getRandomInRange(MIN_YEAR, currentYear),
-      getRandomInRange(MIN_MOUNTH_IN_YEAR, MAX_MOUNTH_IN_YEAR),
-      getRandomInRange(MIN_DAY_IN_MOUNTH, MAX_DAY_IN_MOUNTH),
-      getRandomNumber(HOURS_IN_DAY),
-      getRandomNumber(MINUTES_IN_HOUR)
-  );
+    const randomDate = new Date(
+        this.getRandomInRange(MIN_YEAR, currentYear),
+        this.getRandomInRange(MIN_MOUNTH_IN_YEAR, MAX_MOUNTH_IN_YEAR),
+        this.getRandomInRange(MIN_DAY_IN_MOUNTH, MAX_DAY_IN_MOUNTH),
+        this.getRandomNumber(Constant.HOURS_IN_DAY),
+        this.getRandomNumber(Constant.MINUTES_IN_HOUR)
+    );
 
-  return randomDate;
-};
+    return randomDate;
+  },
 
-const formatTime = (timeInMinutes) => {
-  let hours = Math.floor(timeInMinutes / MINUTES_IN_HOUR);
-  let minutes = timeInMinutes % MINUTES_IN_HOUR;
+  formatTime(timeInMinutes) {
+    let hours = Math.floor(timeInMinutes / Constant.MINUTES_IN_HOUR);
+    let minutes = timeInMinutes % Constant.MINUTES_IN_HOUR;
 
-  return `${hours}h ${minutes}m`;
-};
+    return `${hours}h ${minutes}m`;
+  },
 
-const getMonthName = (mounthNumber) => MONTHS[mounthNumber - 1];
+  getMonthName(mounthNumber) {
+    return Constant.MONTHS[mounthNumber - 1];
+  },
 
-export {
-  getMonthName,
-  shuffleArray,
-  getRandomNumber,
-  getRandomElementInArray,
-  getRandomInRange,
-  getRandomDate,
-  formatTime,
-  booleanList
+  createElement(template) {
+    const newElement = document.createElement(`div`);
+
+    newElement.innerHTML = template;
+
+    return newElement.firstChild;
+  },
+
+  renderElement(container, element, place = Constant.RenderPosition.BEFOREEND) {
+    switch (place) {
+      case Constant.RenderPosition.AFTERBEGIN:
+        container.prepend(element);
+        break;
+      case Constant.RenderPosition.BEFOREEND:
+        container.append(element);
+        break;
+    }
+  },
+
+  getFilmsCards(cardsData) {
+    let filmsCards = [];
+
+    for (let i = 0; i < cardsData.length; i++) {
+      filmsCards.push(new FilmCard(cardsData[i]).getElement());
+    }
+
+    return filmsCards;
+  },
 };

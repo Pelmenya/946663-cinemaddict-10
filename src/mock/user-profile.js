@@ -1,11 +1,13 @@
-import {getRandomNumber} from './../util';
+import {util} from './../util';
 
 const VIEWED_MOVIES = 22;
 
-const RankRerequirement = function (minViews, maxViews) {
-  this.minViews = minViews;
-  this.maxViews = maxViews;
-};
+class RankRerequirement {
+  constructor(minViews, maxViews) {
+    this.minViews = minViews;
+    this.maxViews = maxViews;
+  }
+}
 
 const Ranks = {
   'novice': {
@@ -36,15 +38,16 @@ const getUserRank = (viewedMoviesCount) => {
   return userRank;
 };
 
-const generateUserProfile = (viewedMoviesCount = getRandomNumber(VIEWED_MOVIES)) => {
-  const userProfile = {
-    viewedMoviesCount,
-    avatar: `./images/bitmap@2x.png`,
-    rank: getUserRank(viewedMoviesCount)
-  };
+const generateUserProfile =
+  (viewedMoviesCount = util.getRandomNumber(VIEWED_MOVIES)) => {
+    const userProfile = {
+      viewedMoviesCount,
+      avatar: `./images/bitmap@2x.png`,
+      rank: getUserRank(viewedMoviesCount)
+    };
 
-  return userProfile;
-};
+    return userProfile;
+  };
 
 export {
   generateUserProfile
