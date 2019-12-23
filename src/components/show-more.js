@@ -1,13 +1,15 @@
 import {util} from './../util';
 import FilmCard from './film-card';
 
-const getShowMoreBtnTemplate = () => `<button class="films-list__show-more">Show more</button>`;
+const getShowMoreBtnTemplate = () =>
+  `<button class="films-list__show-more">Show more</button>`;
 
 export default class ShowMoreBtn {
   constructor(renderCardsAmount, filmsList) {
+    this._element = null;
+
     this._renderCardsAmount = renderCardsAmount;
     this._filmsList = filmsList;
-    this._element = null;
   }
 
   getTemplate() {
@@ -17,7 +19,10 @@ export default class ShowMoreBtn {
   getElement() {
     if (!this._element) {
       this._element = util.createElement(this.getTemplate());
-      this._element.addEventListener(`click`, this.onShowMoreBtnClick.bind(this));
+      this._element.addEventListener(
+          `click`,
+          this.onShowMoreBtnClick.bind(this)
+      );
     }
 
     return this._element;
@@ -28,11 +33,14 @@ export default class ShowMoreBtn {
   }
 
   onShowMoreBtnClick() {
-    const cardsContainer = this._element.parentElement.querySelector(`.films-list__container`);
+    const cardsContainer =
+      this._element.parentElement.querySelector(`.films-list__container`);
     let filmCardsAmount = cardsContainer.querySelectorAll(`.film-card`).length;
     let endRenderIndex = filmCardsAmount + this._renderCardsAmount;
 
-    if (filmCardsAmount < this._filmsList.length && endRenderIndex <= this._filmsList.length) {
+    if (filmCardsAmount < this._filmsList.length &&
+        endRenderIndex <= this._filmsList.length
+    ) {
       let renderList = this._filmsList.slice(filmCardsAmount, endRenderIndex);
       let cardsList = [];
 

@@ -10,6 +10,7 @@ const getMainFilmsListTemplate = (mainFilmsListTitle) =>
 export default class MainFilmsList {
   constructor(mainFilmsListTitle, filmsDataList, defaultCardsAmount) {
     this._element = null;
+
     this._filmsDataList = filmsDataList;
     this._mainFilmsListTitle = mainFilmsListTitle;
     this._filmsCards = this.getCards(defaultCardsAmount);

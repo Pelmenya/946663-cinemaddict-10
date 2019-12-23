@@ -10,6 +10,7 @@ const getTopRatedFilmsList = (filmsListTitle) =>
 export default class TopRatedFilmsList {
   constructor(filmsListTitle, cardsAmount, filmsDataList) {
     this._element = null;
+
     this._filmListTitle = filmsListTitle;
     this._filmsDataList = filmsDataList.slice();
     this._filmsCards = this.getCards(cardsAmount);
@@ -18,10 +19,16 @@ export default class TopRatedFilmsList {
   getCards(count) {
     let cardsData;
 
-    if (this._filmsDataList.every((film) => film.rating === this._filmsDataList[0].rating)) {
-      cardsData = util.shuffleArray(this._filmsDataList).slice(0, count);
+    if (this._filmsDataList.every(
+        (film) => film.rating === this._filmsDataList[0].rating)
+    ) {
+      cardsData = util
+        .shuffleArray(this._filmsDataList)
+        .slice(0, count);
     } else {
-      cardsData = this._filmsDataList.sort((a, b) => b.rating - a.rating).slice(0, count);
+      cardsData = this._filmsDataList
+        .sort((a, b) => b.rating - a.rating)
+        .slice(0, count);
     }
 
     return util.getFilmsCards(cardsData);

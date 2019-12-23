@@ -10,6 +10,7 @@ const getMostCommentedFilmsList = (filmsListTitle) =>
 export default class MostCommentedFilmsList {
   constructor(filmsListTitle, cardsAmount, filmsDataList) {
     this._element = null;
+
     this._filmListTitle = filmsListTitle;
     this._filmsDataList = filmsDataList.slice();
     this._filmsCards = this.getCards(cardsAmount);
@@ -18,17 +19,28 @@ export default class MostCommentedFilmsList {
   getCards(count) {
     let cardsData;
 
-    if (this._filmsDataList.every((film) => film.comments.length === this._filmsDataList[0].comments.length)) {
-      cardsData = util.shuffleArray(this._filmsDataList).slice(0, count);
+    if (
+      this._filmsDataList.every(
+          (film) =>
+            film.comments.length === this._filmsDataList[0].comments.length)
+    ) {
+      cardsData = util
+        .shuffleArray(this._filmsDataList)
+        .slice(0, count);
     } else {
-      cardsData = this._filmsDataList.sort((a, b) => b.comments.length - a.comments.length).slice(0, count);
+      cardsData = this._filmsDataList
+        .sort((a, b) => b.comments.length - a.comments.length)
+        .slice(0, count);
     }
 
     return util.getFilmsCards(cardsData);
   }
 
   getTemplate() {
-    return getMostCommentedFilmsList(this._filmListTitle, this._filmsCardsTemplates);
+    return getMostCommentedFilmsList(
+        this._filmListTitle,
+        this._filmsCardsTemplates
+    );
   }
 
   getElement() {

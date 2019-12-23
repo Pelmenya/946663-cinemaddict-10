@@ -1,6 +1,10 @@
 import {util} from './../util';
 
-const getFilterTemplate = (watchlistFilmsAmount, historyFilmsAmount, favoritesFilmsAmount) =>
+const getFilterTemplate = (
+    watchlistFilmsAmount,
+    historyFilmsAmount,
+    favoritesFilmsAmount
+) =>
   `<nav class="main-navigation">
     <a href="#all" class="main-navigation__item main-navigation__item--active">
       All movies
@@ -17,7 +21,10 @@ const getFilterTemplate = (watchlistFilmsAmount, historyFilmsAmount, favoritesFi
       Favorites
       <span class="main-navigation__item-count">${favoritesFilmsAmount}</span>
     </a>
-    <a href="#stats" class="main-navigation__item main-navigation__item--additional">
+    <a
+      href="#stats"
+      class="main-navigation__item main-navigation__item--additional
+    ">
       Stats
     </a>
   </nav>`;
@@ -25,7 +32,8 @@ const getFilterTemplate = (watchlistFilmsAmount, historyFilmsAmount, favoritesFi
 export default class Filter {
   constructor(filmsDataList) {
     this._element = null;
-    this.filmsDataList = filmsDataList;
+
+    this._filmsDataList = filmsDataList;
   }
 
   getTemplate() {
@@ -49,14 +57,14 @@ export default class Filter {
   }
 
   getFavoriteFilmsList() {
-    return this.filmsDataList.filter((film) => film.isFavorite === true);
+    return this._filmsDataList.filter((film) => film.isFavorite === true);
   }
 
   getWatchlist() {
-    return this.filmsDataList.filter((film) => film.isInWatchlist === true);
+    return this._filmsDataList.filter((film) => film.isInWatchlist === true);
   }
 
   getHistoryFilmsList() {
-    return this.filmsDataList.filter((film) => film.isAlreadyViewed === true);
+    return this._filmsDataList.filter((film) => film.isAlreadyViewed === true);
   }
 }

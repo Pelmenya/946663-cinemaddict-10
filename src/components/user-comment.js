@@ -1,6 +1,11 @@
 import {util} from './../util';
 
-const getCommentTemplate = (userName, commentDay, commentText, commentEmojiURL) =>
+const getCommentTemplate = (
+    userName,
+    commentDay,
+    commentText,
+    commentEmojiURL
+) =>
   `<li class="film-details__comment">
     <span class="film-details__comment-emoji">
       <img src="${commentEmojiURL}" width="55" height="55" alt="emoji">
@@ -25,15 +30,20 @@ export default class UserComment {
   constructor(popupData, commentId) {
     this._element = null;
 
-    this.comment = popupData.comments[commentId];
-    this.userName = this.comment.commentAuthor;
-    this.commentText = this.comment.commentText;
-    this.commentDay = this.comment.commentDay;
-    this.commentEmojiURL = this.comment.commentEmojiURL;
+    this._comment = popupData.comments[commentId];
+    this._userName = this._comment.commentAuthor;
+    this._commentText = this._comment.commentText;
+    this._commentDay = this._comment.commentDay;
+    this._commentEmojiURL = this._comment.commentEmojiURL;
   }
 
   getTemplate() {
-    return getCommentTemplate(this.userName, this.commentDay, this.commentText, this.commentEmojiURL);
+    return getCommentTemplate(
+        this._userName,
+        this._commentDay,
+        this._commentText,
+        this._commentEmojiURL
+    );
   }
 
   getElement() {

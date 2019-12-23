@@ -38,15 +38,16 @@ const getUserRank = (viewedMoviesCount) => {
   return userRank;
 };
 
-const generateUserProfile = (viewedMoviesCount = util.getRandomNumber(VIEWED_MOVIES)) => {
-  const userProfile = {
-    viewedMoviesCount,
-    avatar: `./images/bitmap@2x.png`,
-    rank: getUserRank(viewedMoviesCount)
-  };
+const generateUserProfile =
+  (viewedMoviesCount = util.getRandomNumber(VIEWED_MOVIES)) => {
+    const userProfile = {
+      viewedMoviesCount,
+      avatar: `./images/bitmap@2x.png`,
+      rank: getUserRank(viewedMoviesCount)
+    };
 
-  return userProfile;
-};
+    return userProfile;
+  };
 
 export {
   generateUserProfile

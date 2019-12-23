@@ -65,12 +65,12 @@ export const util = {
     return newElement.firstChild;
   },
 
-  renderElement(container, element, place = Constant.RENDER_POSITION.BEFOREEND) {
+  renderElement(container, element, place = Constant.RenderPosition.BEFOREEND) {
     switch (place) {
-      case Constant.RENDER_POSITION.AFTERBEGIN:
+      case Constant.RenderPosition.AFTERBEGIN:
         container.prepend(element);
         break;
-      case Constant.RENDER_POSITION.BEFOREEND:
+      case Constant.RenderPosition.BEFOREEND:
         container.append(element);
         break;
     }

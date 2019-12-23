@@ -88,10 +88,15 @@ const getFilmDuration = () => util.formatTime(
 
 const getFilmDescription = () => {
   const sentenceQuantity =
-    util.getRandomInRange(MIN_SENTENCE_IN_DESCRIPTION, MAX_SENTENCE_IN_DESCRIPTION);
+    util.getRandomInRange(
+        MIN_SENTENCE_IN_DESCRIPTION,
+        MAX_SENTENCE_IN_DESCRIPTION
+    );
 
   let description = FILMS_DESCRIPTION
-    .slice(util.getRandomInRange(MIN_SENTENCE_IN_DESCRIPTION, sentenceQuantity))
+    .slice(
+        util.getRandomInRange(MIN_SENTENCE_IN_DESCRIPTION, sentenceQuantity)
+    )
     .join(`. `);
 
   return description;

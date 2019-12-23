@@ -20,7 +20,7 @@ export const Constant = {
 
   BOOLEAN_VALUES: [true, false],
 
-  RENDER_POSITION: {
+  RenderPosition: {
     //   внутрь elem, в самое начало.
     AFTERBEGIN: `afterBegin`,
     //  внутрь elem, в конец.

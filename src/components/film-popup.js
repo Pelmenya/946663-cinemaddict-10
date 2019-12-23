@@ -7,18 +7,28 @@ const getFilmPopupTemplate = (filmPopup) =>
     <form class="film-details__inner" action="" method="get">
       <div class="form-details__top-container">
         <div class="film-details__close">
-          <button class="film-details__close-btn" type="button">close</button>
+          <button
+            class="film-details__close-btn"
+            type="button"
+          >
+            close
+          </button>
         </div>
         <div class="film-details__info-wrap">
           <div class="film-details__poster">
-            <img class="film-details__poster-img" src="${filmPopup.posterUrl}" alt="">
+            <img
+              class="film-details__poster-img"
+              src="${filmPopup.posterUrl}" alt=""
+            >
             <p class="film-details__age">${filmPopup.ageСategory}</p>
           </div>
         <div class="film-details__info">
           <div class="film-details__info-head">
             <div class="film-details__title-wrap">
               <h3 class="film-details__title">${filmPopup.title}</h3>
-              <p class="film-details__title-original">${filmPopup.titleOriginal}</p>
+              <p class="film-details__title-original">
+                ${filmPopup.titleOriginal}
+              </p>
             </div>
             <div class="film-details__rating">
               <p class="film-details__total-rating">${filmPopup.rating}</p>
@@ -64,16 +74,47 @@ const getFilmPopupTemplate = (filmPopup) =>
         </div>
       </div>
       <section class="film-details__controls">
-        <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist">
-        <label for="watchlist" class="film-details__control-label film-details__control-label--watchlist">
+        <input
+          type="checkbox"
+          class="film-details__control-input visually-hidden"
+          id="watchlist"
+          name="watchlist"
+        >
+        <label
+          for="watchlist"
+          class="
+            film-details__control-label
+            film-details__control-label--watchlist
+          "
+        >
           Add to watchlist
         </label>
-        <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched">
-        <label for="watched" class="film-details__control-label film-details__control-label--watched">
+        <input
+          type="checkbox"
+          class="film-details__control-input visually-hidden"
+          id="watched"
+          name="watched"
+        >
+        <label
+          for="watched"
+          class="
+            film-details__control-label
+            film-details__control-label--watched
+          ">
           Already watched
         </label>
-        <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite">
-        <label for="favorite" class="film-details__control-label film-details__control-label--favorite">
+        <input
+          type="checkbox"
+          class="film-details__control-input visually-hidden"
+          id="favorite"
+          name="favorite"
+        >
+        <label
+          for="favorite"
+          class="
+            film-details__control-label
+            film-details__control-label--favorite
+          ">
           Add to favorites
         </label>
       </section>
@@ -91,24 +132,72 @@ const getFilmPopupTemplate = (filmPopup) =>
           <div for="add-emoji" class="film-details__add-emoji-label"></div>
 
           <label class="film-details__comment-label">
-            <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
+            <textarea
+              class="film-details__comment-input"
+              placeholder="Select reaction below and write comment here"
+              name="comment">
+            </textarea>
           </label>
           <div class="film-details__emoji-list">
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-smile" value="sleeping">
+            <input
+              class="film-details__emoji-item visually-hidden"
+              name="comment-emoji"
+              type="radio"
+              id="emoji-smile"
+              value="sleeping"
+            >
             <label class="film-details__emoji-label" for="emoji-smile">
-              <img src="./images/emoji/smile.png" width="30" height="30" alt="emoji">
+              <img
+                src="./images/emoji/smile.png"
+                width="30"
+                height="30"
+                alt="emoji"
+              >
             </label>
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-sleeping" value="neutral-face">
+            <input
+              class="film-details__emoji-item visually-hidden"
+              name="comment-emoji"
+              type="radio"
+              id="emoji-sleeping"
+              value="neutral-face"
+            >
             <label class="film-details__emoji-label" for="emoji-sleeping">
-              <img src="./images/emoji/sleeping.png" width="30" height="30" alt="emoji">
+              <img
+                src="./images/emoji/sleeping.png"
+                width="30"
+                height="30"
+                alt="emoji"
+              >
             </label>
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-gpuke" value="grinning">
+            <input
+              class="film-details__emoji-item visually-hidden"
+              name="comment-emoji"
+              type="radio"
+              id="emoji-gpuke"
+              value="grinning"
+            >
             <label class="film-details__emoji-label" for="emoji-gpuke">
-              <img src="./images/emoji/puke.png" width="30" height="30" alt="emoji">
+              <img
+                src="./images/emoji/puke.png"
+                width="30"
+                height="30"
+                alt="emoji"
+              >
             </label>
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-angry" value="grinning">
+            <input
+              class="film-details__emoji-item visually-hidden"
+              name="comment-emoji"
+              type="radio"
+              id="emoji-angry"
+              value="grinning"
+            >
             <label class="film-details__emoji-label" for="emoji-angry">
-              <img src="./images/emoji/angry.png" width="30" height="30" alt="emoji">
+              <img
+                src="./images/emoji/angry.png"
+                width="30"
+                height="30"
+                alt="emoji"
+              >
             </label>
           </div>
         </div>
@@ -120,6 +209,7 @@ const getFilmPopupTemplate = (filmPopup) =>
 export default class FilmPopup {
   constructor(filmData) {
     this._element = null;
+
     this._popupData = generateFilmPopup(filmData);
     this._renderElement = util.renderElement;
   }

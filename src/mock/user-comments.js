@@ -30,7 +30,11 @@ const Comment = function () {
 
   this.commentText = `${util.getRandomElementInArray(commentsText)}`;
   this.commentAuthor = `${util.getRandomElementInArray(authorsList)}`;
-  this.commentDay = `${util.getRandomDate().getFullYear()}/${util.getRandomDate().getMonth()}/${util.getRandomDate().getDate()} ${util.getRandomDate().getHours()}:${util.getRandomDate().getMinutes()}`;
+  this.commentDay =
+    `${util.getRandomDate().getFullYear()}/
+    ${util.getRandomDate().getMonth()}/
+    ${util.getRandomDate().getDate()}
+    ${util.getRandomDate().getHours()}:${util.getRandomDate().getMinutes()}`;
 };
 
 const generateCommentsList = () => {
