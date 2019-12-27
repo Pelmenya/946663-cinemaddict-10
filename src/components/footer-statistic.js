@@ -1,4 +1,4 @@
-import {util} from './../util';
+import AbstractComponent from './absctract';
 
 const getFooterStatisticTemplate = (numberOfFilms) => {
   const statisticDescription =
@@ -12,26 +12,14 @@ const getFooterStatisticTemplate = (numberOfFilms) => {
   return statisticTemplate;
 };
 
-export default class FilmsAmountStatistic {
+export default class FilmsAmountStatistic extends AbstractComponent {
   constructor(numberOfFilms) {
-    this._element = null;
+    super();
 
     this._numberOfFilms = numberOfFilms;
   }
 
   getTemplate() {
     return getFooterStatisticTemplate(this._numberOfFilms);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = util.createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

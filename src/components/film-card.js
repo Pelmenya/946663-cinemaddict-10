@@ -1,5 +1,10 @@
-import {util} from './../util';
+import {
+  getRandomElementInArray,
+  createElement
+} from './../utils/util';
+
 import FilmPopup from './film-popup';
+import AbstractComponent from './absctract';
 
 const getFilmCardTemplate = (
     title,
@@ -9,7 +14,7 @@ const getFilmCardTemplate = (
     mainGenre,
     posterUrl,
     shortDescription,
-    commentsAmount
+    commentsAmountMessage
 ) =>
   `<article class="film-card">
     <h3 class="film-card__title">${title}</h3>
@@ -21,7 +26,7 @@ const getFilmCardTemplate = (
     </p>
     <img src="${posterUrl}" alt="" class="film-card__poster">
     <p class="film-card__description">${shortDescription}</p>
-    <a class="film-card__comments">${commentsAmount}</a>
+    <a class="film-card__comments">${commentsAmountMessage}</a>
     <form class="film-card__controls">
       <button class="
         film-card__controls-item
@@ -47,9 +52,9 @@ const getFilmCardTemplate = (
     </form>
   </article>`;
 
-export default class FilmCard {
+export default class FilmCard extends AbstractComponent {
   constructor(filmCardData) {
-    this._element = null;
+    super();
 
     this._filmCardData = filmCardData;
     this._cardPopup = new FilmPopup(filmCardData);
@@ -58,20 +63,21 @@ export default class FilmCard {
 
     this._posterUrl = filmCardData.posterUrl;
     this._title = filmCardData.title;
-    this._rating = filmCardData.rating;
     this._releaseYear = filmCardData.releaseDate.getFullYear();
     this._duration = filmCardData.duration;
     this._id = filmCardData.id;
 
-    this._mainGenre = util.getRandomElementInArray(filmCardData.genres);
+    this._mainGenre = getRandomElementInArray(filmCardData.genres);
 
     this._shortDescription =
-      this.getShortFilmDescription(filmCardData.description);
+    this.getShortFilmDescription(filmCardData.description);
 
-    this._commentsAmount =
-      `${filmCardData.comments.length}
-      ${filmCardData.comments.length === 1 ? `comment` : `comments`}`;
+    this.commentsAmount = filmCardData.comments.length;
+    this.rating = filmCardData.rating;
 
+    this._commentsAmountMessage =
+    `${this.commentsAmount}
+    ${this.commentsAmount === 1 ? `comment` : `comments`}`;
   }
 
   getShortFilmDescription(description) {
@@ -88,13 +94,13 @@ export default class FilmCard {
   getTemplate() {
     return getFilmCardTemplate(
         this._title,
-        this._rating,
+        this.rating,
         this._releaseYear,
         this._duration,
         this._mainGenre,
         this._posterUrl,
         this._shortDescription,
-        this._commentsAmount);
+        this._commentsAmountMessage);
   }
 
   getOpeningPopupElements() {
@@ -105,32 +111,12 @@ export default class FilmCard {
     ];
   }
 
-  onOpeningPopupElementsClick(evt) {
-    evt.preventDefault();
-
-    util.renderElement(
-        document.querySelector(`.main`),
-        this._cardPopup.getElement()
-    );
-  }
-
   getElement() {
     if (!this._element) {
-      this._element = util.createElement(this.getTemplate());
-      this._element.dataset.id = this.id;
-
-      for (let element of this.getOpeningPopupElements()) {
-        element.addEventListener(
-            `click`,
-            this.onOpeningPopupElementsClick.bind(this)
-        );
-      }
+      this._element = createElement(this.getTemplate());
+      this._element.dataset.id = this._id;
     }
 
     return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

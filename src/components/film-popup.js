@@ -1,6 +1,7 @@
 import {generateFilmPopup} from './../mock/film-popup';
-import {util} from './../util';
 import UserComment from './user-comment';
+import AbstractComponent from './absctract';
+import {renderElement} from './../utils/render';
 
 const getFilmPopupTemplate = (filmPopup) =>
   `<section class="film-details">
@@ -206,40 +207,33 @@ const getFilmPopupTemplate = (filmPopup) =>
   </form>
 </section>`;
 
-export default class FilmPopup {
+export default class FilmPopup extends AbstractComponent {
   constructor(filmData) {
-    this._element = null;
+    super();
 
     this._popupData = generateFilmPopup(filmData);
-    this._renderElement = util.renderElement;
+    this._renderElement = renderElement;
   }
 
   getTemplate() {
     return getFilmPopupTemplate(this._popupData);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = util.createElement(this.getTemplate());
-
-      this._element.querySelector(`.film-details__close-btn`)
-        .addEventListener(`click`, this.onClosePopupBtnClick.bind(this));
-
-      for (let i = 0; i < this._popupData.comments.length; i++) {
-        this._renderElement(
-            this._element.querySelector(`.film-details__comments-list`),
-            new UserComment(this._popupData, i).getElement());
-      }
+  renderPopupComments() {
+    for (let i = 0; i < this._popupData.comments.length; i++) {
+      this._renderElement(
+          this._element.querySelector(`.film-details__comments-list`),
+          new UserComment(this._popupData, i)
+      );
     }
-
-    return this._element;
   }
 
-  removeElement() {
-    this._element = null;
-  }
+  addClosePopupLogic() {
+    const onClosePopupBtnClick = () => {
+      this._element.remove();
+    };
 
-  onClosePopupBtnClick() {
-    this._element.remove();
+    this._element.querySelector(`.film-details__close-btn`)
+      .addEventListener(`click`, onClosePopupBtnClick);
   }
 }

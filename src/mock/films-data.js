@@ -1,5 +1,15 @@
-import {util} from './../util';
-import {Constant} from './../constans';
+import {
+  getRandomElementInArray,
+  formatTime,
+  getRandomDate,
+  shuffleArray,
+  getRandomInRange
+} from './../utils/util';
+
+import {
+  BOOLEAN_VALUES
+} from './../constans';
+
 import {generateCommentsList} from './user-comments';
 
 const MIN_SENTENCE_IN_DESCRIPTION = 1;
@@ -80,22 +90,22 @@ const movieTitles = [
 ];
 
 const getPosterUrl = () =>
-  `images/posters/${util.getRandomElementInArray(POSTERS_TITLES)}`;
+  `images/posters/${getRandomElementInArray(POSTERS_TITLES)}`;
 
-const getFilmDuration = () => util.formatTime(
-    util.getRandomInRange(MIN_FILM_DURATION, MAX_FILM_DURATION)
+const getFilmDuration = () => formatTime(
+    getRandomInRange(MIN_FILM_DURATION, MAX_FILM_DURATION)
 );
 
 const getFilmDescription = () => {
   const sentenceQuantity =
-    util.getRandomInRange(
+    getRandomInRange(
         MIN_SENTENCE_IN_DESCRIPTION,
         MAX_SENTENCE_IN_DESCRIPTION
     );
 
   let description = FILMS_DESCRIPTION
     .slice(
-        util.getRandomInRange(MIN_SENTENCE_IN_DESCRIPTION, sentenceQuantity)
+        getRandomInRange(MIN_SENTENCE_IN_DESCRIPTION, sentenceQuantity)
     )
     .join(`. `);
 
@@ -108,23 +118,23 @@ const getRating = () =>
 const generateFilmData = () => {
   const filmData = {
     posterUrl: getPosterUrl(),
-    ageСategory: util.getRandomElementInArray(ageCategories),
-    title: util.getRandomElementInArray(movieTitles),
+    ageСategory: getRandomElementInArray(ageCategories),
+    title: getRandomElementInArray(movieTitles),
     titleOriginal: `fishTitle`,
     rating: getRating(),
     director: `someDirector`,
     writers: `some authors`,
     actors: `some actors`,
-    releaseDate: util.getRandomDate(),
+    releaseDate: getRandomDate(),
     duration: getFilmDuration(),
     country: `someCountry`,
-    genres: util.shuffleArray(MOVIE_GENRES).slice(0, 3),
+    genres: shuffleArray(MOVIE_GENRES).slice(0, 3),
     description: getFilmDescription(),
     comments: generateCommentsList(),
 
-    isInWatchlist: util.getRandomElementInArray(Constant.BOOLEAN_VALUES),
-    isFavorite: util.getRandomElementInArray(Constant.BOOLEAN_VALUES),
-    isAlreadyViewed: util.getRandomElementInArray(Constant.BOOLEAN_VALUES)
+    isInWatchlist: getRandomElementInArray(BOOLEAN_VALUES),
+    isFavorite: getRandomElementInArray(BOOLEAN_VALUES),
+    isAlreadyViewed: getRandomElementInArray(BOOLEAN_VALUES)
   };
 
   return filmData;

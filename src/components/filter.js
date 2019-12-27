@@ -1,4 +1,4 @@
-import {util} from './../util';
+import AbstractComponent from './absctract';
 
 const getFilterTemplate = (
     watchlistFilmsAmount,
@@ -29,9 +29,9 @@ const getFilterTemplate = (
     </a>
   </nav>`;
 
-export default class Filter {
+export default class Filter extends AbstractComponent {
   constructor(filmsDataList) {
-    this._element = null;
+    super();
 
     this._filmsDataList = filmsDataList;
   }
@@ -42,18 +42,6 @@ export default class Filter {
         this.getHistoryFilmsList().length,
         this.getFavoriteFilmsList().length
     );
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = util.createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 
   getFavoriteFilmsList() {

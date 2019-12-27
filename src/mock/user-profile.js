@@ -1,4 +1,4 @@
-import {util} from './../util';
+import {getRandomNumber} from './../utils/util';
 
 const VIEWED_MOVIES = 22;
 
@@ -39,7 +39,7 @@ const getUserRank = (viewedMoviesCount) => {
 };
 
 const generateUserProfile =
-  (viewedMoviesCount = util.getRandomNumber(VIEWED_MOVIES)) => {
+  (viewedMoviesCount = getRandomNumber(VIEWED_MOVIES)) => {
     const userProfile = {
       viewedMoviesCount,
       avatar: `./images/bitmap@2x.png`,

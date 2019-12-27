@@ -1,4 +1,4 @@
-import {util} from './../util';
+import AbstractComponent from './absctract';
 
 const getUserProfileTemplate = (rank, avatar) =>
   `<section class="header__profile profile">
@@ -12,9 +12,9 @@ const getUserProfileTemplate = (rank, avatar) =>
     >
   </section>`;
 
-export default class UserProfile {
+export default class UserProfile extends AbstractComponent {
   constructor(generatedUserProfile) {
-    this._element = null;
+    super();
 
     this._userRank = generatedUserProfile.rank;
     this._userAvatar = generatedUserProfile.avatar;
@@ -23,17 +23,5 @@ export default class UserProfile {
 
   getTemplate() {
     return getUserProfileTemplate(this._userRank, this._userAvatar);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = util.createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

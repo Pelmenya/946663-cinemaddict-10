@@ -1,4 +1,4 @@
-import {util} from './../util';
+import AbstractComponent from './absctract';
 
 const getCommentTemplate = (
     userName,
@@ -26,9 +26,9 @@ const getCommentTemplate = (
     </div>
   </li>`;
 
-export default class UserComment {
+export default class UserComment extends AbstractComponent {
   constructor(popupData, commentId) {
-    this._element = null;
+    super();
 
     this._comment = popupData.comments[commentId];
     this._userName = this._comment.commentAuthor;
@@ -44,17 +44,5 @@ export default class UserComment {
         this._commentText,
         this._commentEmojiURL
     );
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = util.createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

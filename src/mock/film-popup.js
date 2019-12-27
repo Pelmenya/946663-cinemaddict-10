@@ -1,4 +1,4 @@
-import {util} from './../util';
+import {getMonthName} from './../utils/util';
 
 const generateFilmPopup = (filmData) => {
   const filmPopupData = {
@@ -12,7 +12,7 @@ const generateFilmPopup = (filmData) => {
     actors: filmData.actors,
     releaseDate:
       `${filmData.releaseDate.getDate()}
-      ${util.getMonthName(filmData.releaseDate.getMonth())}
+      ${getMonthName(filmData.releaseDate.getMonth())}
       ${filmData.releaseDate.getFullYear()}`,
     runtime: filmData.duration,
     country: filmData.country,

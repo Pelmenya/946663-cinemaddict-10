@@ -1,12 +1,13 @@
-import {util} from './../util';
 import FilmCard from './film-card';
+import AbstractComponent from './absctract';
+import {renderElement} from './../utils/render';
 
 const getShowMoreBtnTemplate = () =>
   `<button class="films-list__show-more">Show more</button>`;
 
-export default class ShowMoreBtn {
+export default class ShowMoreBtn extends AbstractComponent {
   constructor(renderCardsAmount, filmsList) {
-    this._element = null;
+    super();
 
     this._renderCardsAmount = renderCardsAmount;
     this._filmsList = filmsList;
@@ -14,22 +15,6 @@ export default class ShowMoreBtn {
 
   getTemplate() {
     return getShowMoreBtnTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = util.createElement(this.getTemplate());
-      this._element.addEventListener(
-          `click`,
-          this.onShowMoreBtnClick.bind(this)
-      );
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 
   onShowMoreBtnClick() {
@@ -49,7 +34,7 @@ export default class ShowMoreBtn {
       }
 
       for (let card of cardsList) {
-        util.renderElement(cardsContainer, card);
+        renderElement(cardsContainer, card);
       }
     }
 
