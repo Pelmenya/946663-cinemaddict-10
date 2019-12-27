@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Даниил Пугачев](https://up.htmlacademy.ru/ecmascript/10/user/946663).
-* Наставник: [Евгений Щеколдин](https://htmlacademy.ru/profile/id861059).
+* Наставник: [Алексей Кораблин](https://htmlacademy.ru/profile/id151213).
 
 ---
 
