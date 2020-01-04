@@ -9,10 +9,10 @@ const getMainFilmsListTemplate = (mainFilmsListTitle) =>
   </section>`;
 
 export default class MainFilmsList extends AbstractComponent {
-  constructor() {
+  constructor(mainFilmsListTitle) {
     super();
 
-    this._LIST_TITLE = `All movies. Upcoming`;
+    this._LIST_TITLE = mainFilmsListTitle;
   }
 
   getTemplate() {

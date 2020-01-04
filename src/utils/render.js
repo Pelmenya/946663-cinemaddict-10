@@ -1,5 +1,4 @@
 import {RenderPosition} from './../constans';
-import FilmCard from './../components/film-card';
 
 const renderElement = (container, component, place = RenderPosition.BEFOREEND) => {
   const componentElement = component.getElement();
@@ -16,23 +15,24 @@ const renderElement = (container, component, place = RenderPosition.BEFOREEND) =
 
 const renderFilmsCards = (
     cardsComponents,
-    cardList,
+    cardListContainer,
     lastRenderIndex = cardsComponents.length
 ) => {
-  let container = cardList.getElement()
+  //  Находим контейнер для отрисовки
+  let container = cardListContainer
     .querySelector(`.films-list__container`);
+
+  //  Находим индексы уже отрисованных карточек
   let cardsOnPageIndices = Array.from(document.querySelectorAll(`.film-card`))
     .map((card) => card.dataset.id);
 
   for (let i = 0; i < lastRenderIndex; i++) {
+    //  Делаем проверку на существование карточки по ее индексу, если она уже сушествует на странице, то клонируем разметку и отрисовываем, если нет, то просто отрисовываем
     if (cardsOnPageIndices
       .some((cardIndex) => cardIndex ===
         cardsComponents[i].getElement().dataset.id)
     ) {
-      let cardCopy = Object.assign({}, cardsComponents[i]);
-      cardCopy.prototype = FilmCard.prototype;
-      console.log(cardCopy.prototype.getTemplate());
-      renderElement(container, cardCopy.prototype);
+      container.append(cardsComponents[i].getElement().cloneNode(true));
     } else {
       renderElement(container, cardsComponents[i]);
     }

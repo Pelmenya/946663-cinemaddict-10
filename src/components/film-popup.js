@@ -228,12 +228,8 @@ export default class FilmPopup extends AbstractComponent {
     }
   }
 
-  addClosePopupLogic() {
-    const onClosePopupBtnClick = () => {
-      this._element.remove();
-    };
-
+  setCloseBtnClickHandler() {
     this._element.querySelector(`.film-details__close-btn`)
-      .addEventListener(`click`, onClosePopupBtnClick);
+      .addEventListener(`click`, () => this.removeElement());
   }
 }

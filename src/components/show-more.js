@@ -1,45 +1,36 @@
-import FilmCard from './film-card';
 import AbstractComponent from './absctract';
-import {renderElement} from './../utils/render';
+import {renderFilmsCards} from './../utils/render';
 
 const getShowMoreBtnTemplate = () =>
   `<button class="films-list__show-more">Show more</button>`;
 
 export default class ShowMoreBtn extends AbstractComponent {
-  constructor(renderCardsAmount, filmsList) {
+  constructor() {
     super();
-
-    this._renderCardsAmount = renderCardsAmount;
-    this._filmsList = filmsList;
   }
 
   getTemplate() {
     return getShowMoreBtnTemplate();
   }
 
-  onShowMoreBtnClick() {
-    const cardsContainer =
-      this._element.parentElement.querySelector(`.films-list__container`);
-    let filmCardsAmount = cardsContainer.querySelectorAll(`.film-card`).length;
-    let endRenderIndex = filmCardsAmount + this._renderCardsAmount;
+  setClickHandler(handler) {
+    this.getElement().addEventListener(`click`, handler);
+  }
 
-    if (filmCardsAmount < this._filmsList.length &&
-        endRenderIndex <= this._filmsList.length
-    ) {
-      let renderList = this._filmsList.slice(filmCardsAmount, endRenderIndex);
-      let cardsList = [];
+  renderMoreCards(renderCardsAmount, cardsComponents) {
+    const cardsContainer = this._element.parentElement;
 
-      for (let i = 0; i < renderList.length; i++) {
-        cardsList.push(new FilmCard(renderList[i]).getElement());
-      }
+    let totalCardsInContainer = cardsContainer.querySelectorAll(`.film-card`).length;
+    let endRenderIndex = totalCardsInContainer + renderCardsAmount;
 
-      for (let card of cardsList) {
-        renderElement(cardsContainer, card);
-      }
+    if (endRenderIndex <= cardsComponents.length) {
+      let renderList = cardsComponents.slice(totalCardsInContainer, endRenderIndex);
+
+      renderFilmsCards(renderList, cardsContainer);
     }
 
-    if (endRenderIndex >= this._filmsList.length) {
-      this._element.remove();
+    if (endRenderIndex >= cardsComponents.length) {
+      this.removeElement();
     }
   }
 }

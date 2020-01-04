@@ -1,5 +1,5 @@
 import FilmCard from '../components/film-card';
-
+import {CARDS_AMOUNT_IN_SUB_LISTS} from './../constans';
 import {
   HOURS_IN_DAY,
   MINUTES_IN_HOUR,
@@ -70,16 +70,6 @@ const createElement = (template) => {
   return newElement.firstChild;
 };
 
-const getFilmsCards = (cardsData) => {
-  let filmsCards = [];
-
-  for (let i = 0; i < cardsData.length; i++) {
-    filmsCards.push(new FilmCard(cardsData[i]));
-  }
-
-  return filmsCards;
-};
-
 const getFilmsCardsComponents = (cardsData) => {
   let filmsCardsComponents = [];
 
@@ -91,10 +81,10 @@ const getFilmsCardsComponents = (cardsData) => {
 };
 
 const getRenderCardsList = (
-    cardsList,
-    listType,
-    cardsAmountInSubLists
+    filmsCardsComponents,
+    listType
 ) => {
+  let cardsList = filmsCardsComponents.slice();
   let renderCardList = [];
 
   switch (listType) {
@@ -103,11 +93,11 @@ const getRenderCardsList = (
           (film) => film.rating === cardsList[0].rating)
       ) {
         renderCardList = shuffleArray(cardsList)
-          .slice(0, cardsAmountInSubLists);
+          .slice(0, CARDS_AMOUNT_IN_SUB_LISTS);
       } else {
         renderCardList = cardsList
           .sort((a, b) => b.rating - a.rating)
-          .slice(0, cardsAmountInSubLists);
+          .slice(0, CARDS_AMOUNT_IN_SUB_LISTS);
       }
 
       break;
@@ -117,16 +107,15 @@ const getRenderCardsList = (
           (film) => film.commentsAmount === cardsList[0].commentsAmount
       )) {
         renderCardList = shuffleArray(cardsList)
-          .slice(0, cardsAmountInSubLists);
+          .slice(0, CARDS_AMOUNT_IN_SUB_LISTS);
       } else {
         renderCardList = cardsList
           .sort((a, b) => b.commentsAmount - a.commentsAmount)
-          .slice(0, cardsAmountInSubLists);
+          .slice(0, CARDS_AMOUNT_IN_SUB_LISTS);
       }
 
       break;
   }
-
   return renderCardList;
 };
 
@@ -136,7 +125,6 @@ export {
   getRandomElementInArray,
   shuffleArray,
   getRandomDate,
-  getFilmsCards,
   formatTime,
   getMonthName,
   createElement,

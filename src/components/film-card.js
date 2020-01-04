@@ -57,7 +57,6 @@ export default class FilmCard extends AbstractComponent {
     super();
 
     this._filmCardData = filmCardData;
-    this._cardPopup = new FilmPopup(filmCardData);
     this._MAX_DESCRIPTION_SYMBOLS_DISPLAYED = 139 - 3;
     this._MAX_DESCRIPTION_LENGTH = 140;
 
@@ -65,8 +64,6 @@ export default class FilmCard extends AbstractComponent {
     this._title = filmCardData.title;
     this._releaseYear = filmCardData.releaseDate.getFullYear();
     this._duration = filmCardData.duration;
-    this._id = filmCardData.id;
-
     this._mainGenre = getRandomElementInArray(filmCardData.genres);
 
     this._shortDescription =
@@ -74,10 +71,12 @@ export default class FilmCard extends AbstractComponent {
 
     this.commentsAmount = filmCardData.comments.length;
     this.rating = filmCardData.rating;
+    this.id = filmCardData.id;
 
     this._commentsAmountMessage =
     `${this.commentsAmount}
     ${this.commentsAmount === 1 ? `comment` : `comments`}`;
+
   }
 
   getShortFilmDescription(description) {
@@ -103,20 +102,26 @@ export default class FilmCard extends AbstractComponent {
         this._commentsAmountMessage);
   }
 
-  getOpeningPopupElements() {
-    return [
-      this._element.querySelector(`.film-card__poster`),
-      this._element.querySelector(`.film-card__title`),
-      this._element.querySelector(`.film-card__comments`)
-    ];
-  }
-
   getElement() {
     if (!this._element) {
       this._element = createElement(this.getTemplate());
-      this._element.dataset.id = this._id;
+      this._element.dataset.id = this.id;
     }
 
     return this._element;
+  }
+
+  setClickHandler(handler) {
+    this.getElement();
+    [
+      this._element.querySelector(`.film-card__poster`),
+      this._element.querySelector(`.film-card__title`),
+      this._element.querySelector(`.film-card__comments`)
+    ]
+      .forEach((cardElement) => cardElement.addEventListener(`click`, handler));
+  }
+
+  getCardPopup() {
+    return new FilmPopup(this._filmCardData);
   }
 }
