@@ -56,7 +56,6 @@ export default class FilmCard extends AbstractComponent {
   constructor(filmCardData) {
     super();
 
-    this._filmCardData = filmCardData;
     this._MAX_DESCRIPTION_SYMBOLS_DISPLAYED = 139 - 3;
     this._MAX_DESCRIPTION_LENGTH = 140;
 
@@ -69,6 +68,7 @@ export default class FilmCard extends AbstractComponent {
     this._shortDescription =
     this.getShortFilmDescription(filmCardData.description);
 
+    this.filmCardData = filmCardData;
     this.commentsAmount = filmCardData.comments.length;
     this.rating = filmCardData.rating;
     this.id = filmCardData.id;
@@ -122,6 +122,6 @@ export default class FilmCard extends AbstractComponent {
   }
 
   getCardPopup() {
-    return new FilmPopup(this._filmCardData);
+    return new FilmPopup(this.filmCardData);
   }
 }
